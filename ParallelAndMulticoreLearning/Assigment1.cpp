@@ -20,7 +20,7 @@ int threadInput;
 atomic <int> valueToCheck = 2; // Starting Value
 
 atomic<int> finalTotal = 0; 
-atomic<long long int> finalSum = 0;
+atomic<unsigned long long> finalSum = 0;
 float finalTime;
 
 vector <int> finalArray; // Placeholder for array
@@ -31,11 +31,12 @@ mutex finalArray_mutex;
 ofstream File("Output.txt", ios::app);
 
 // Declare Functions
-void ResultsToFile(float time, int total, int sum, vector <int> array);
+void ResultsToFile(float time, int total, unsigned long long sum, vector <int> array);
+vector <int> SortAndConvertTopTen(vector <int> array);
 void ThreadSorter(int n, int threadNum);
 void PrimeFinder(int n) {
 	int sen = 0;
-	long long int threadSum = 0;
+	unsigned long long threadSum = 0;
 	int threadTotal = 0;
 	vector <int> threadArray;
 
@@ -95,7 +96,7 @@ int main() {
 	//int cutdownArray[finalArray.size()]
 	//std::copy(v.begin(), v.end(), cutdownArray);
 	// Print results
-	ResultsToFile(finalTime, finalTotal, finalSum, finalArray);
+	ResultsToFile(finalTime, finalTotal, finalSum, SortAndConvertTopTen(finalArray));
 	// Fix Array or we are fucked!
 
 	// Makes VS happy
@@ -106,10 +107,12 @@ int main() {
 // Define the other functions
 //======================================================
 
-void ResultsToFile(float time, int total, int sum, vector <int> array) {
+void ResultsToFile(float time, int total, unsigned long long sum, vector <int> array) {
 	//<execution time> <total number of primes found> <sum of all primes found> <top ten maximum primes, listed in order from lowest to highest>
 	File << "Inputs: (range: " << rangeInput << " | threads: " << threadInput << ") Outputs: " << fixed << setprecision(3) << time << "s | Total #: " << total << " | Sum: " << sum << " | ";
+
 	for (int i = 0; i < array.size(); i++) {
+
 		File << array[i] << " ";
 	}
 	File << "\n";
@@ -131,4 +134,27 @@ void ThreadSorter(int n, int threadNum) {
 	{
 		threads[i].join();
 	}
+}
+
+vector <int> SortAndConvertTopTen(vector <int> array) {
+	// Determine how many elements to select (K = 10, or fewer if the vector is smaller)
+	const size_t K = 10;
+	size_t count = std::min(K, array.size());
+
+	//Find 10th/smallest value
+	auto nth_position = array.begin() + (array.size() - count);
+
+	// Partial sort
+	std::nth_element(array.begin(), nth_position, array.end());
+
+	//Sort rest of values
+	std::sort(nth_position, array.end());
+
+
+	// Init return vector and fill it with the last 10 pieces of data
+	std::vector<int> top_10_sorted;
+	std::copy(nth_position, array.end(), std::back_inserter(top_10_sorted));
+
+	//return the vector
+	return top_10_sorted;
 }

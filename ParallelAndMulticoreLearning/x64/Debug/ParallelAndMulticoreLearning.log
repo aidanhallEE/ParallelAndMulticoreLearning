@@ -1,7 +1,2 @@
 ﻿  Assigment1.cpp
-C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1.cpp(98,39): warning C4244: 'argument': conversion from '_Ty' to 'int', possible loss of data
-C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1.cpp(98,39): warning C4244:         with
-C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1.cpp(98,39): warning C4244:         [
-C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1.cpp(98,39): warning C4244:             _Ty=__int64
-C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1.cpp(98,39): warning C4244:         ]
   ParallelAndMulticoreLearning.vcxproj -> C:\Github Repos\ParallelAndMulticoreLearning\x64\Debug\ParallelAndMulticoreLearning.exe
