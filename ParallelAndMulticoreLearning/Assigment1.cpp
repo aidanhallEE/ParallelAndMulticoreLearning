@@ -17,25 +17,27 @@ std::vector<std::thread> threads;
 int rangeInput;
 int threadInput;
 
-atomic <int> valueToCheck = 2;
+atomic <int> valueToCheck = 2; // Starting Value
 
-atomic<int> finalTotal = 0;
+atomic<int> finalTotal = 0; 
 atomic<long long int> finalSum = 0;
-vector <int> finalArray; // Placeholder for array
 float finalTime;
+
+vector <int> finalArray; // Placeholder for array
+mutex finalArray_mutex;
+
 
 // File
 ofstream File("Output.txt", ios::app);
 
 // Declare Functions
-
-void ResultsToFile(float time, int total, int sum, int array[]);
+void ResultsToFile(float time, int total, int sum, vector <int> array);
 void ThreadSorter(int n, int threadNum);
 void PrimeFinder(int n) {
 	int sen = 0;
 	long long int threadSum = 0;
 	int threadTotal = 0;
-	vector <int> array;
+	vector <int> threadArray;
 
 	while(1){
 		int i = valueToCheck.fetch_add(1);
@@ -54,7 +56,7 @@ void PrimeFinder(int n) {
 		if (sen == 0) {
 			threadTotal++;
 			threadSum = threadSum + i;
-			array.push_back(i);
+			threadArray.push_back(i);
 			//cout << i << ", ";
 		}
 		else {
@@ -64,6 +66,8 @@ void PrimeFinder(int n) {
 	// Output
 	finalTotal.fetch_add(threadTotal);
 	finalSum.fetch_add(threadSum);
+	lock_guard<std::mutex> lock(finalArray_mutex);
+	finalArray.insert(finalArray.end(), threadArray.begin(), threadArray.end());
 	//Append array to final array
 }
 
@@ -91,7 +95,7 @@ int main() {
 	//int cutdownArray[finalArray.size()]
 	//std::copy(v.begin(), v.end(), cutdownArray);
 	// Print results
-	ResultsToFile(finalTime, finalTotal, finalSum, cutdownArray);
+	ResultsToFile(finalTime, finalTotal, finalSum, finalArray);
 	// Fix Array or we are fucked!
 
 	// Makes VS happy
@@ -102,9 +106,13 @@ int main() {
 // Define the other functions
 //======================================================
 
-void ResultsToFile(float time, int total, int sum, int array[]) {
+void ResultsToFile(float time, int total, int sum, vector <int> array) {
 	//<execution time> <total number of primes found> <sum of all primes found> <top ten maximum primes, listed in order from lowest to highest>
-	File << "Inputs: (range: " << rangeInput << " | threads: " << threadInput << ") Outputs: " << fixed << setprecision(3) << time << "s | Total #: " << total << " | Sum: " << sum << " | " << array << "\n";
+	File << "Inputs: (range: " << rangeInput << " | threads: " << threadInput << ") Outputs: " << fixed << setprecision(3) << time << "s | Total #: " << total << " | Sum: " << sum << " | ";
+	for (int i = 0; i < array.size(); i++) {
+		File << array[i] << " ";
+	}
+	File << "\n";
 	File.close();
 }
 
