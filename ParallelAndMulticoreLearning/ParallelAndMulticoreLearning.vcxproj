@@ -129,6 +129,7 @@
     <Text Include="backup.txt" />
     <Text Include="backup2.txt" />
     <Text Include="Output.txt" />
+    <Text Include="readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

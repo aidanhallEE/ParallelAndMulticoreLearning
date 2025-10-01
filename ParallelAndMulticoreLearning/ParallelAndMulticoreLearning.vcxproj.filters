@@ -23,5 +23,6 @@
     <Text Include="Output.txt" />
     <Text Include="backup.txt" />
     <Text Include="backup2.txt" />
+    <Text Include="readme.txt" />
   </ItemGroup>
 </Project>

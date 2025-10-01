@@ -1,15 +1,15 @@
-#include <iostream> //output
-#include <fstream> // write to file
-#include <chrono> //time
-#include <atomic> //threads
-#include <thread> //Need this for threads i think?
-#include <math.h> // Sqrt
-#include <tuple> // For multi output
-#include <iomanip>
-#include <vector> // i dont even know anymore
-#include <algorithm> // Needed for std::sort and std::nth_element
-#include <mutex>     // Needed for thread-safe access to the primes list
+#include <iostream>  // For: Input and Output 
+#include <fstream>   // For: File operations
+#include <chrono>    // For: For execution time
+#include <atomic>    // For: Atomic opperations
+#include <thread>    // For: For spawning threads
+#include <math.h>    // For: Sqrt()
+#include <iomanip>   // For: Decimal Precision
+#include <vector>    // For: Arrays but better
+#include <algorithm> // For: Needed for sort and nth_element
+#include <mutex>     // For: Thread locking
 
+// Simplification
 using namespace std;
 std::vector<std::thread> threads;
 
@@ -17,15 +17,15 @@ std::vector<std::thread> threads;
 int rangeInput;
 int threadInput;
 
-atomic <int> valueToCheck = 2; // Starting Value
+// Starting Value
+atomic <int> valueToCheck = 2; 
 
 atomic<int> finalTotal = 0; 
 atomic<unsigned long long> finalSum = 0;
 float finalTime;
 
-vector <int> finalArray; // Placeholder for array
+vector <int> finalArray;
 mutex finalArray_mutex;
-
 
 // File
 ofstream File("Output.txt", ios::app);
@@ -41,46 +41,50 @@ void PrimeFinder(int n) {
 	vector <int> threadArray;
 
 	while(1){
+		//This thread is now checking the next number
 		int i = valueToCheck.fetch_add(1);
 
+		// Check if all numbers are already checked
 		if (i > n) {
-			break; // All numbers checked
+			break; 
 		}
 
-
+		// Check for primes
 		for (int j = 2; j < sqrt(i); j++) { //Sqrt of i reduces time
 			if (i % j == 0) {
 				sen = 1;
 				break;
 			}
 		}
+
+		// If one of the values was prime
 		if (sen == 0) {
+			// Update thread output data
 			threadTotal++;
 			threadSum = threadSum + i;
 			threadArray.push_back(i);
-			//cout << i << ", ";
 		}
 		else {
 			sen = 0;
 		}
 	}
+
 	// Output
 	finalTotal.fetch_add(threadTotal);
 	finalSum.fetch_add(threadSum);
-	lock_guard<std::mutex> lock(finalArray_mutex);
-	finalArray.insert(finalArray.end(), threadArray.begin(), threadArray.end());
-	//Append array to final array
-}
 
+	lock_guard<std::mutex> lock(finalArray_mutex);
+	finalArray.insert(finalArray.end(), threadArray.begin(), threadArray.end());//Append array to final array
+}
+// MAIN
 int main() {
-	// Input
+	// Input for range and thread
 	cout << "Enter Range: ";
 	cin >> rangeInput;
 
 	cout << "Enter # of Threads: ";
 	cin >> threadInput;
 
-	// DO IT
 	// Start Clock
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
@@ -92,40 +96,40 @@ int main() {
 
 	//Finalize Data
 	finalTime = (std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count()/(float)1000);
+	finalArray = SortAndConvertTopTen(finalArray);
 
-	//int cutdownArray[finalArray.size()]
-	//std::copy(v.begin(), v.end(), cutdownArray);
 	// Print results
-	ResultsToFile(finalTime, finalTotal, finalSum, SortAndConvertTopTen(finalArray));
-	// Fix Array or we are fucked!
+	ResultsToFile(finalTime, finalTotal, finalSum, finalArray);
 
 	// Makes VS happy
 	return 1;
 }
 
-
-// Define the other functions
+//======================================================
+//             Define the other functions
 //======================================================
 
 void ResultsToFile(float time, int total, unsigned long long sum, vector <int> array) {
 	//<execution time> <total number of primes found> <sum of all primes found> <top ten maximum primes, listed in order from lowest to highest>
 	File << "Inputs: (range: " << rangeInput << " | threads: " << threadInput << ") Outputs: " << fixed << setprecision(3) << time << "s | Total #: " << total << " | Sum: " << sum << " | ";
-
+	
+	// Put in the last 10 primes
 	for (int i = 0; i < array.size(); i++) {
 
 		File << array[i] << " ";
 	}
 	File << "\n";
+	//close the file
 	File.close();
 }
 
 
 void ThreadSorter(int n, int threadNum) {
-	//Clear it out
+	//Clear out threads from previous run
 	threads.clear();
 
 	for (int t = 0; t < threadNum; t++) {
-		// Every thread runs the same function, racing for the next number
+		// Every thread runs the same function and grabs the next avaliable number
 		threads.emplace_back(std::thread(PrimeFinder, n));
 	}
 
@@ -141,7 +145,7 @@ vector <int> SortAndConvertTopTen(vector <int> array) {
 	const size_t K = 10;
 	size_t count = std::min(K, array.size());
 
-	//Find 10th/smallest value
+	//Find 10th value
 	auto nth_position = array.begin() + (array.size() - count);
 
 	// Partial sort
