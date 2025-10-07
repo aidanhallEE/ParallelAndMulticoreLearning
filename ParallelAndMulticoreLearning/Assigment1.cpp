@@ -1,8 +1,8 @@
 #include <iostream>  // For: Input and Output 
 #include <fstream>   // For: File operations
-#include <chrono>    // For: For execution time
+#include <chrono>    // For: Execution time
 #include <atomic>    // For: Atomic opperations
-#include <thread>    // For: For spawning threads
+#include <thread>    // For: Spawning threads
 #include <math.h>    // For: Sqrt()
 #include <iomanip>   // For: Decimal Precision
 #include <vector>    // For: Arrays but better
@@ -28,7 +28,7 @@ vector <int> finalArray;
 mutex finalArray_mutex;
 
 // File
-ofstream File("Output.txt", ios::app);
+ofstream File("primes.txt", ios::app);
 
 // Declare Functions
 void ResultsToFile(float time, int total, unsigned long long sum, vector <int> array);
