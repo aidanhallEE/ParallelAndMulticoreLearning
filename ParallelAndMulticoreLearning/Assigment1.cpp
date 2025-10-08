@@ -102,7 +102,7 @@ int main() {
 	ResultsToFile(finalTime, finalTotal, finalSum, finalArray);
 
 	// Makes VS happy
-	return 1;
+	return 0;
 }
 
 //======================================================
@@ -130,7 +130,7 @@ void ThreadSorter(int n, int threadNum) {
 
 	for (int t = 0; t < threadNum; t++) {
 		// Every thread runs the same function and grabs the next avaliable number
-		threads.emplace_back(std::thread(PrimeFinder, n));
+		threads.emplace_back(thread(PrimeFinder, n));
 	}
 
 	// Join the threads
