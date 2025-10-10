@@ -33,3 +33,4 @@ Inputs: (range: 1000000 | threads: 16) Outputs: 0.151s | Total #: 78666 | Sum: 3
 
 Inputs: (range: 7002312 | threads: 1) Outputs: 10.747s | Total #: 477169 | Sum: 1608817525287 | 7002161 7002167 7002197 7002199 7002217 7002221 7002223 7002227 7002257 7002293 
 Inputs: (range: 7002312 | threads: 16) Outputs: 1.307s | Total #: 477169 | Sum: 1608817525287 | 7002161 7002167 7002197 7002199 7002217 7002221 7002223 7002227 7002257 7002293 
+Inputs: (range: 1 | threads: 1) Outputs: 0.004s | Total #: 0 | Sum: 0 | 

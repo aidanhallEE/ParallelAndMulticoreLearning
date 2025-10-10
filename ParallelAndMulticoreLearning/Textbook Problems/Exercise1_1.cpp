@@ -1,13 +1,12 @@
-#include <thread>
-#include <iostream>
-#include <vector>
-#include <mutex>
-#include <algorithm>
-#include <memory>
-#include <chrono>
+#include <thread>   // For: Threads
+#include <iostream> // For: Input/Output
+#include <vector>   // For: Better Arrays
+#include <mutex>    // For: Mututal Exclusion
+#include <chrono>   // For: Time
 
 int N; //Number of philosphers/threads
-std::vector<std::unique_ptr<std::mutex>> chopsticks;
+
+std::vector<std::unique_ptr<std::mutex>> chopsticks; //mutex array for chopsticks
 std::vector<std::thread> threads; // array for threads
 
 //functions
@@ -22,7 +21,7 @@ int main() {
 	// Set number of chopsticks
 	//chopsticks.resize(N);
 	for (int i = 0; i < N; ++i) {
-		// emplace_back constructs a new unique_ptr in place, holding a new mutex.
+		// make unique mutex pointer for each chopstick
 		chopsticks.emplace_back(std::make_unique<std::mutex>());
 	}
 
@@ -44,14 +43,15 @@ int main() {
 }
 
 void phillospher(int i) {
-	// only for the last guy
+	// get index of the sticks this thread will be using
 	int leftStick = i;
 	int rightStick = ((i + 1) % chopsticks.size());	// Instead of having an extra if statment I can just use modulo to make the last phillospher pick up the first chopstick as his right hand one
 
-	// 
+	// set which stick is picked first
 	int leftLock = std::min(leftStick, rightStick);
 	int rightLock = std::max(leftStick, rightStick);
 
+	//
 	std::mutex& m1 = *chopsticks[leftLock];
 	std::mutex& m2 = *chopsticks[rightLock];
 
@@ -60,8 +60,9 @@ void phillospher(int i) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(rand() % 5000));
 
 		// go eat
-		std::lock(m1, m2); //grab both chopsticks and if it can't it puts them back
+		std::lock(m1, m2); //attempts to grab both chopsticks at the same time, or waits until it can
 
+		//Adopts the lock and releases when the loop restarts
 		std::lock_guard<std::mutex> lock_first(m1, std::adopt_lock);
 		std::lock_guard<std::mutex> lock_second(m2, std::adopt_lock);
 
