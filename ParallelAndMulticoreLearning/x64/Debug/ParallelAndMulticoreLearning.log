@@ -1,3 +1,4 @@
 ﻿  Assigment1_Sieve.cpp
-C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1_Sieve.cpp(9,6): warning C4101: 'threadInput': unreferenced local variable
+C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1_Sieve.cpp(37,6): warning C4101: 'threadInput': unreferenced local variable
+C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1_Sieve.cpp(36,6): warning C4101: 'nInput': unreferenced local variable
   ParallelAndMulticoreLearning.vcxproj -> C:\Github Repos\ParallelAndMulticoreLearning\x64\Debug\ParallelAndMulticoreLearning.exe
