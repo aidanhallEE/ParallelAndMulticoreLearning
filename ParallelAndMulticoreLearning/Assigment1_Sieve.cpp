@@ -1,9 +1,10 @@
 #include <iostream>
-#include <math.h> // For: Sqrt
+#include <math.h>    // For: Sqrt
 #include <vector>    // For: Arrays but better
 #include <thread>
 #include <fstream>   // For: File operations
 #include <mutex>
+#include <chrono>    // For: Execution time
 
 // Simplification
 using namespace std;
@@ -37,27 +38,26 @@ int main() {
 	int threadInput;
 
 	// Prompts
-	std::cout << "n: ";
-	std::cin >> rangeInput;
+	cout << "Enter Range: ";
+	cin >> rangeInput;
+
+	cout << "Enter # of Threads: ";
+	cin >> threadInput;
 
 	//array
 	compositeNumArray.resize(rangeInput+1);
+	
+	// Start Clock
+	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 
-	// Going Up to sqrt(n), check each number that hasn't been marked prime yet and update all it's multiples
-	/*
-	for (int i = 2; i < sqrt(rangeInput); i++) {
-		// Add another if statement containing the rest checking if the array[i] is 0 <- This makes sure we don't do unneeded checks
-		if (isPrime(i) && compositeNumArray[i] == 0) {
-		// Update allllll of the multiples of the number up to n
-			for (int j = i; i*j < (rangeInput + 1); j++) {
-				std::cout << "do multiple of " << i << ": " << i*j << '\n'; //Debug Print
-				compositeNumArray[i * j] = 1; // Actual thing to use
-			}
-		}
-	}
-	*/
-	ThreadSorter(rangeInput, 16);
+	// Do function
+	ThreadSorter(rangeInput, threadInput);
 
+	// End clock
+	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+
+	
+	// Print result
 	for (int i = 2; i < rangeInput+1; i++) {
 		//std::cout << compositeNumArray[i] << "\n\n";
 
@@ -67,7 +67,7 @@ int main() {
 
 	}
 
-	// Probably will have to end up making a new print!!!!
+	// Probably will have to end up making a new print function!!!!
 
 
 
