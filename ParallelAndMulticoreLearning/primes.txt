@@ -1,0 +1,27 @@
+Inputs: (range: 20 | threads: 0) Outputs: 20.100s | Total #: 10 | Sum: 0 | 
+Inputs: (range: 10 | threads: 0) Outputs: 20.100s | Total #: 6 | Sum: 0 | 
+Inputs: (range: 10 | threads: 0) Outputs: 20.100s | Total #: 6 | Sum: 0 | 
+Inputs: (range: 10 | threads: 0) Outputs: 20.100s | Total #: 6 | Sum: 18 | 
+Inputs: (range: 5 | threads: 0) Outputs: 20.100s | Total #: 4 | Sum: 6 | 
+
+Inputs: (range: 10 | threads: 0) Outputs: 20.100s | Total #: 4 | Sum: 17 | // Fixed total and sum
+
+Inputs: (range: 10 | threads: 0) Outputs: 0.007s | Total #: 4 | Sum: 17 | // Fixed time
+Inputs: (range: 1000 | threads: 0) Outputs: 0.475s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 100 | threads: 0) Outputs: 0.033s | Total #: 25 | Sum: 1060 | 
+
+Inputs: (range: 100 | threads: 1) Outputs: 0.076s | Total #: 25 | Sum: 1060 |  // Fixed showing threads
+Inputs: (range: 100 | threads: 1) Outputs: 0.034s | Total #: 25 | Sum: 1060 | 
+Inputs: (range: 1000 | threads: 1) Outputs: 0.006s | Total #: 168 | Sum: 76127 | 
+
+Inputs: (range: 100000 | threads: 1) Outputs: 0.079s | Total #: 9592 | Sum: 454396537 |
+Inputs: (range: 100000 | threads: 2) Outputs: 0.108s | Total #: 9592 | Sum: 454396537 |
+Inputs: (range: 100000 | threads: 16) Outputs: 0.217s | Total #: 9592 | Sum: 454396537 | 
+ 
+
+Inputs: (range: 1000000 | threads: 1) Outputs: 0.845s | Total #: 78498 | Sum: 37550402023 | 
+Inputs: (range: 1000000 | threads: 2) Outputs: 1.137s | Total #: 78498 | Sum: 37550402023 | 
+
+Inputs: (range: 10000000 | threads: 1) Outputs: 8.666s | Total #: 664579 | Sum: 3203324994356 | 
+Inputs: (range: 10000000 | threads: 16) Outputs: 29.308s | Total #: 664579 | Sum: 3203324994356 | 
+Inputs: (range: 10000000 | threads: 2) Outputs: 10.886s | Total #: 664579 | Sum: 3203324994356 | 

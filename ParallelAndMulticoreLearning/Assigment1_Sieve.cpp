@@ -5,6 +5,7 @@
 #include <fstream>   // For: File operations
 #include <mutex>
 #include <chrono>    // For: Execution time
+#include <iomanip>   // For: Decimal Precision when printing
 
 // Simplification
 using namespace std;
@@ -31,12 +32,9 @@ ofstream File("primes.txt", ios::app);
 bool isPrime(int number);
 void ThreadSorter(int n, int threadNum);
 void PrimeFinder(int n);
+void ResultsToFile(float time);
 
 int main() {
-	// Define Inputs
-	int nInput;
-	int threadInput;
-
 	// Prompts
 	cout << "Enter Range: ";
 	cin >> rangeInput;
@@ -56,7 +54,10 @@ int main() {
 	// End clock
 	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
 
-	
+	// Get the time
+	finalTime = (std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() / (float)1000);
+
+	/*
 	// Print result
 	for (int i = 2; i < rangeInput+1; i++) {
 		//std::cout << compositeNumArray[i] << "\n\n";
@@ -66,10 +67,11 @@ int main() {
 		}
 
 	}
+	*/
 
 	// Probably will have to end up making a new print function!!!!
 
-
+	ResultsToFile(finalTime);
 
 	return -1;
 }
@@ -106,7 +108,6 @@ void ThreadSorter(int n, int threadNum) {
 void PrimeFinder(int n) {
 	unsigned long long threadSum = 0;
 	int threadTotal = 0;
-	vector <int> threadArray;
 
 	while (1) {
 		//This thread is now checking the next number
@@ -121,9 +122,37 @@ void PrimeFinder(int n) {
 		if (isPrime(i) && compositeNumArray[i] == 0) {
 			// Update allllll of the multiples of the number up to n
 			for (int j = i; i * j < (rangeInput + 1); j++) {
-				std::cout << "do multiple of " << i << ": " << i * j << '\n'; //Debug Print
+				//std::cout << "do multiple of " << i << ": " << i * j << '\n'; //Debug Print
 				compositeNumArray[i * j] = 1; // Actual thing to use
 			}
 		}
 	}
+}
+
+void ResultsToFile(float time) {
+	unsigned long long sum = 0;
+	int total = 0;
+
+	//get sum and total (cycle through the entire array)
+	for (int i = 2; i < rangeInput; i++) {
+		if (compositeNumArray[i] == 0) {
+			total++;
+			sum = sum + i;
+		}
+	}
+
+	//<execution time> <total number of primes found> <sum of all primes found> <top ten maximum primes, listed in order from lowest to highest>
+	File << "Inputs: (range: " << rangeInput << " | threads: " << threadInput << ") Outputs: " << fixed << setprecision(3) << time << "s | Total #: " << total << " | Sum: " << sum << " | ";
+
+	/*
+	// Put in the last 10 primes
+	for (int i = 0; i < array.size(); i++) {
+
+		File << array[i] << " ";
+	}
+	*/
+
+	File << "\n";
+	//close the file
+	File.close();
 }
