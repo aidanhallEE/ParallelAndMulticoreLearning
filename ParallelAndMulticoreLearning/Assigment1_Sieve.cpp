@@ -18,8 +18,6 @@ vector <bool> compositeNumArray;
 
 atomic <int> valueToCheck = 2;
 
-atomic<int> finalTotal = 0;
-atomic<unsigned long long> finalSum = 0;
 float finalTime;
 
 vector <int> finalArray;
@@ -30,6 +28,8 @@ ofstream File("primes.txt", ios::app);
 
 // Prototypes
 bool isPrime(int number);
+void ThreadSorter(int n, int threadNum);
+void PrimeFinder(int n);
 
 int main() {
 	// Define Inputs
@@ -44,7 +44,7 @@ int main() {
 	compositeNumArray.resize(rangeInput+1);
 
 	// Going Up to sqrt(n), check each number that hasn't been marked prime yet and update all it's multiples
-
+	/*
 	for (int i = 2; i < sqrt(rangeInput); i++) {
 		// Add another if statement containing the rest checking if the array[i] is 0 <- This makes sure we don't do unneeded checks
 		if (isPrime(i) && compositeNumArray[i] == 0) {
@@ -55,6 +55,8 @@ int main() {
 			}
 		}
 	}
+	*/
+	ThreadSorter(rangeInput, 16);
 
 	for (int i = 2; i < rangeInput+1; i++) {
 		//std::cout << compositeNumArray[i] << "\n\n";
@@ -82,4 +84,46 @@ bool isPrime(int number) {
 	}
 
 	return prime;
+}
+
+
+void ThreadSorter(int n, int threadNum) {
+	//Clear out threads from previous run
+	threads.clear();
+
+	for (int t = 0; t < threadNum; t++) {
+		// Every thread runs the same function and grabs the next avaliable number
+		threads.emplace_back(thread(PrimeFinder, n));
+	}
+
+	// Join the threads
+	for (int i = 0; i < threadNum; i++)
+	{
+		threads[i].join();
+	}
+}
+
+void PrimeFinder(int n) {
+	unsigned long long threadSum = 0;
+	int threadTotal = 0;
+	vector <int> threadArray;
+
+	while (1) {
+		//This thread is now checking the next number
+		int i = valueToCheck.fetch_add(1);
+
+		// Check if all numbers are already checked
+		if (i > sqrt(n)) {
+			break;
+		}
+
+		// Add another if statement containing the rest checking if the array[i] is 0 <- This makes sure we don't do unneeded checks
+		if (isPrime(i) && compositeNumArray[i] == 0) {
+			// Update allllll of the multiples of the number up to n
+			for (int j = i; i * j < (rangeInput + 1); j++) {
+				std::cout << "do multiple of " << i << ": " << i * j << '\n'; //Debug Print
+				compositeNumArray[i * j] = 1; // Actual thing to use
+			}
+		}
+	}
 }
