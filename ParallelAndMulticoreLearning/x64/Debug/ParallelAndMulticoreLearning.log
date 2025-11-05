@@ -1,2 +1,32 @@
-﻿  Assigment1_Sieve.cpp
+﻿  Assigment1_Sieve_EvenWork.cpp
+C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1_Sieve_EvenWork.cpp(84,11): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,98): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  (compiling source file 'Assigment1_Sieve_EvenWork.cpp')
+      C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\type_traits(1680,98):
+      the template instantiation context (the oldest one first) is
+          C:\Github Repos\ParallelAndMulticoreLearning\ParallelAndMulticoreLearning\Assigment1_Sieve_EvenWork.cpp(88,31):
+          see reference to function template instantiation 'std::thread::thread<void(__cdecl &)(int,int),int&,double,0>(_Fn,int &,double &&)' being compiled
+          with
+          [
+              _Fn=void (__cdecl &)(int,int)
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\thread(93,9):
+          see reference to function template instantiation 'void std::thread::_Start<void(__cdecl &)(int,int),int&,_Ty>(_Fn,int &,_Ty &&)' being compiled
+          with
+          [
+              _Ty=double,
+              _Fn=void (__cdecl &)(int,int)
+          ]
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\thread(76,40):
+          see reference to function template instantiation 'unsigned int (__cdecl *std::thread::_Get_invoke<std::thread::_Start::_Tuple,0,1,2>(std::integer_sequence<size_t,0,1,2>) noexcept)(void *)' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\thread(67,17):
+          see reference to function template instantiation 'unsigned int std::thread::_Invoke<std::thread::_Start::_Tuple,0,1,2>(void *) noexcept' being compiled
+          C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\thread(60,14):
+          see reference to function template instantiation 'void std::invoke<void(__cdecl *)(int,int),int,double>(_Callable &&,_Ty1 &&,double &&) noexcept(false)' being compiled
+          with
+          [
+              _Callable=void (__cdecl *)(int,int),
+              _Ty1=int
+          ]
+  
   ParallelAndMulticoreLearning.vcxproj -> C:\Github Repos\ParallelAndMulticoreLearning\x64\Debug\ParallelAndMulticoreLearning.exe

@@ -123,11 +123,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Assigment1_Sieve.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="OLD_primes.txt" />
     <Text Include="primes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Assigment1_Sieve_EvenWork.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

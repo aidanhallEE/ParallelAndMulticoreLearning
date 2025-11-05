@@ -24,4 +24,91 @@ Inputs: (range: 1000000 | threads: 2) Outputs: 1.137s | Total #: 78498 | Sum: 37
 
 Inputs: (range: 10000000 | threads: 1) Outputs: 8.666s | Total #: 664579 | Sum: 3203324994356 | 
 Inputs: (range: 10000000 | threads: 16) Outputs: 29.308s | Total #: 664579 | Sum: 3203324994356 | 
-Inputs: (range: 10000000 | threads: 2) Outputs: 10.886s | Total #: 664579 | Sum: 3203324994356 | 
+Inputs: (range: 10000000 | threads: 2) Outputs: 10.886s | Total #: 664579 | Sum: 3203324994356 |
+
+Inputs: (range: 10 | threads: 1) Outputs: 0.007s | Total #: 4 | Sum: 17 | //Changed parallel method to splitting up work into simple sections
+Inputs: (range: 10 | threads: 1) Outputs: 0.007s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 10 | threads: 2) Outputs: 0.009s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 1000 | threads: 1) Outputs: 0.006s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 1000 | threads: 2) Outputs: 0.008s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 1000 | threads: 16) Outputs: 0.016s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 10000 | threads: 1) Outputs: 0.131s | Total #: 1229 | Sum: 5736396 | 
+Inputs: (range: 10000 | threads: 2) Outputs: 0.104s | Total #: 1229 | Sum: 5736396 | 
+Inputs: (range: 10000 | threads: 16) Outputs: 0.054s | Total #: 1229 | Sum: 5736396 | 
+Inputs: (range: 1000 | threads: 16) Outputs: 0.017s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 10000 | threads: 16) Outputs: 0.052s | Total #: 1229 | Sum: 5736396 | 
+Inputs: (range: 1000 | threads: 1) Outputs: 0.006s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 1000 | threads: 16) Outputs: 0.020s | Total #: 185 | Sum: 88650 | 
+Inputs: (range: 100000 | threads: 1) Outputs: 0.077s | Total #: 9592 | Sum: 454396537 | 
+Inputs: (range: 100000 | threads: 16) Outputs: 0.129s | Total #: 9601 | Sum: 455269514 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.006s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 10 | threads: 2) Outputs: 0.007s | Total #: 5 | Sum: 26 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.005s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.005s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.007s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 12 | threads: 1) Outputs: 0.007s | Total #: 5 | Sum: 28 | 
+
+Inputs: (range: 11 | threads: 1) Outputs: 0.010s | Total #: 5 | Sum: 26 | // Fixed thread sorter by rounding up int division
+Inputs: (range: 10 | threads: 1) Outputs: 0.010s | Total #: 5 | Sum: 26 | // Nevermind it is broken still
+Inputs: (range: 10 | threads: 2) Outputs: 0.014s | Total #: 5 | Sum: 26 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.009s | Total #: 5 | Sum: 26 | 
+
+Inputs: (range: 10 | threads: 1) Outputs: 0.014s | Total #: 4 | Sum: 17 | // maybe fixed?
+Inputs: (range: 11 | threads: 1) Outputs: 0.009s | Total #: 4 | Sum: 17 | // nope
+Inputs: (range: 10 | threads: 2) Outputs: 0.012s | Total #: 5 | Sum: 26 | // super broken
+
+Inputs: (range: 10 | threads: 1) Outputs: 0.011s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.009s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 10 | threads: 2) Outputs: 0.014s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 2) Outputs: 0.013s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.010s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 10 | threads: 2) Outputs: 0.028s | Total #: 5 | Sum: 26 | 
+Inputs: (range: 10 | threads: 3) Outputs: 0.016s | Total #: 5 | Sum: 26 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.010s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 2) Outputs: 0.018s | Total #: 5 | Sum: 26 | 
+
+Inputs: (range: 10 | threads: 1) Outputs: 0.012s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.010s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.008s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.006s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.007s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 12 | threads: 1) Outputs: 0.008s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.008s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.007s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.006s | Total #: 5 | Sum: 26 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.006s | Total #: 6 | Sum: 37 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.008s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.007s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 12 | threads: 1) Outputs: 0.008s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 10 | threads: 2) Outputs: 0.011s | Total #: 5 | Sum: 26 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.030s | Total #: 25 | Sum: 1060 | 
+Inputs: (range: 100 | threads: 2) Outputs: 0.060s | Total #: 25 | Sum: 1060 | 
+Inputs: (range: 1000 | threads: 1) Outputs: 0.400s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 1000 | threads: 2) Outputs: 0.449s | Total #: 169 | Sum: 77088 | 
+Inputs: (range: 10000 | threads: 1) Outputs: 0.015s | Total #: 1229 | Sum: 5736396 | 
+Inputs: (range: 10000 | threads: 2) Outputs: 0.017s | Total #: 1229 | Sum: 5736396 | 
+Inputs: (range: 100000 | threads: 1) Outputs: 0.075s | Total #: 9592 | Sum: 454396537 | 
+Inputs: (range: 100000 | threads: 2) Outputs: 0.103s | Total #: 9592 | Sum: 454396537 | 
+Inputs: (range: 1000000 | threads: 1) Outputs: 0.835s | Total #: 78498 | Sum: 37550402023 | 
+Inputs: (range: 1000000 | threads: 2) Outputs: 0.953s | Total #: 78498 | Sum: 37550402023 | 
+Inputs: (range: 1000000 | threads: 16) Outputs: 2.069s | Total #: 78499 | Sum: 37551396032 | 
+Inputs: (range: 10000000 | threads: 1) Outputs: 8.767s | Total #: 664579 | Sum: 3203324994356 | 
+Inputs: (range: 10000000 | threads: 2) Outputs: 8.820s | Total #: 664579 | Sum: 3203324994356 | 
+Inputs: (range: 11 | threads: 2) Outputs: 0.007s | Total #: 6 | Sum: 37 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.030s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.005s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 11 | threads: 2) Outputs: 0.007s | Total #: 6 | Sum: 37 | 
+Inputs: (range: 10 | threads: 2) Outputs: 0.007s | Total #: 5 | Sum: 26 | 
+Inputs: (range: 100000000 | threads: 1) Outputs: 72.602s | Total #: 5761455 | Sum: 279209790387276 | 
+Inputs: (range: 11 | threads: 1) Outputs: 0.006s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 11 | threads: 2) Outputs: 0.006s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.005s | Total #: 4 | Sum: 17 |
+
+Inputs: (range: 10 | threads: 1) Outputs: 0.004s | Total #: 4 | Sum: 17 | // fixed??????
+Inputs: (range: 11 | threads: 1) Outputs: 0.006s | Total #: 5 | Sum: 28 | 
+Inputs: (range: 10 | threads: 2) Outputs: 0.006s | Total #: 4 | Sum: 17 | 
+Inputs: (range: 11 | threads: 2) Outputs: 0.006s | Total #: 5 | Sum: 28 | // IT IS FIXED YEAHH!!!!!
+Inputs: (range: 1000 | threads: 1) Outputs: 0.006s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 1000 | threads: 2) Outputs: 0.008s | Total #: 168 | Sum: 76127 | 
+Inputs: (range: 100000 | threads: 1) Outputs: 0.078s | Total #: 9592 | Sum: 454396537 | 
+Inputs: (range: 100000 | threads: 2) Outputs: 0.090s | Total #: 9592 | Sum: 454396537 | 
