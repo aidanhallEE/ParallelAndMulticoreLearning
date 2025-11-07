@@ -17,6 +17,7 @@ int threadInput;
 
 // Starting Value
 vector <bool> compositeNumArray;
+vector <int> rootPrimes;
 
 atomic <int> valueToCheck = 2;
 
@@ -32,6 +33,7 @@ ofstream File("primes.txt", ios::app);
 bool isPrime(int number);
 void ThreadSorter(int n, int threadNum);
 void PrimeFinder(int start, int end);
+void RootPrimeFinder(int n);
 void ResultsToFile(float time);
 
 int main() {
@@ -44,6 +46,9 @@ int main() {
 
 	// Set up array
 	compositeNumArray.resize(rangeInput + 1);
+
+	// Get primes up to sqrt n
+	RootPrimeFinder(rangeInput);
 
 	// Start Clock
 	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
@@ -81,11 +86,11 @@ void ThreadSorter(int n, int threadNum) {
 	threads.clear();
 
 	int start = 2;
-	int size = ((sqrt(n+1)))/threadNum-2;
+	int size = (n/threadNum)-2;
 
 	for (int t = 0; t < threadNum; t++) {
-		if (t == (threadNum -1)) {
-			threads.emplace_back(thread(PrimeFinder, start, sqrt(n)));
+		if (t == (threadNum - 1)) {
+			threads.emplace_back(thread(PrimeFinder, start, n));
 			break;
 		}
 		// Every thread runs the same function and grabs the next avaliable number
@@ -102,17 +107,64 @@ void ThreadSorter(int n, int threadNum) {
 }
 
 void PrimeFinder(int start, int end) {
-	for (int i = start; i < end+1; i ++) {
-		// Add another if statement containing the rest checking if the array[i] is 0 <- This makes sure we don't do unneeded checks
-		if (compositeNumArray[i] == 0) { // Wait I don't even need isPrime(i)
+	// Make local vector
+	int segmentSize = end - start;
+	vector <bool> localNumArray(segmentSize+1, 0);
+
+	int startMultiplier = 0;
+	int prime = 0;
+
+	int TESTCOUNTER = 0;
+
+	for (int p = 0; p < size(rootPrimes); p++) { // USE THIS FOR LOOP TO INSTEAD CYCLE THROUGH THE FOUND PRIMES
+		prime = rootPrimes[p];
+		
+		startMultiplier = start / prime + start % prime; // Get the starting value to be multiplied by the prime number
+		if (startMultiplier < 2) {
+			startMultiplier = start;
+		}
+		//cout << "Inside the for loop\n";
+
+		// Set all the multiples
+		for (int j = startMultiplier; prime * (j) < (end + 1); j++) {
+			//cout << "Inside the second for loop\n";
+			//cout << "Position of multiplied: " << prime * j - start << " j: " << j << "\n";
+			//localNumArray[(prime * j)-start] = 1; // Fix this to fit inside the bounds
+		}
+	}
+	//cout << "After thread prime finder\n";
+
+	//Collect the results
+	// how to do......
+}
+
+void RootPrimeFinder(int n) { // n is the sqrt of the range
+	// make local array
+	vector <bool> localNumArray(sqrt(n)+1, 0);
+
+	// prime sieve
+	for (int i = 2; i < sqrt(n); i++) {
+		if (localNumArray[i] == 0) { 
 			// Update allllll of the multiples of the number up to n
-			for (int j = i; i * j < (rangeInput + 1); j++) {
+			for (int j = i; i * j < sqrt(n); j++) {
 				//std::cout << "do multiple of " << i << ": " << i * j << '\n'; //Debug Print
-				compositeNumArray[i * j] = 1; // Actual thing to use
+				localNumArray[i * j] = 1; // Actual thing to use
 			}
 		}
 	}
+
+	cout << "After Root Primes\n";
+
+	// Add it to the int list
+	for (int i = 2; i < sqrt(n); i++) {
+		if (localNumArray[i] == false) {
+			cout << i << "\n";
+			rootPrimes.push_back(i);
+		}
+	}
+	cout << "After adding root primes to list\n";
 }
+
 
 void ResultsToFile(float time) {
 	unsigned long long sum = 0;
