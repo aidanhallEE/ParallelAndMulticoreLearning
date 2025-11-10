@@ -136,13 +136,14 @@ void PrimeFinder(int start, int end) {
 	//Collect the results
 	// how to do......
 	// Array for numbers
-	for (int i = 0; i < segmentSize + 1; i++) {
+	for (int i = 0; i < segmentSize + 1; i++) { //ADD MUTEX TO MAKE IT WORKKK!!
 		if (localNumArray[i] == 0) {
 			localintArray.push_back(i + start);
 		}
 	}
 
 	// Add too final
+	lock_guard<std::mutex> lock(finalArray_mutex);
 	finalArray.insert(finalArray.end(), localintArray.begin(), localintArray.end());
 }
 

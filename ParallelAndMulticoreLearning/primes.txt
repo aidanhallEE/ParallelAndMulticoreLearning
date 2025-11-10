@@ -177,3 +177,13 @@ Inputs: (range: 100 | threads: 1) Outputs: 0.007s | Total #: 24 | Sum: 963 |
 
 Inputs: (range: 100 | threads: 1) Outputs: 0.006s | Total #: 25 | Sum: 1060 |  // FULLY FUNCTIONAL EXCEPT FOR PRINTING THE TOP 10!
 Inputs: (range: 100 | threads: 2) Outputs: 0.007s | Total #: 11 | Sum: 783 |  // Uhhh nevermind
+Inputs: (range: 10000 | threads: 1) Outputs: 0.016s | Total #: 1229 | Sum: 5736396 | 
+Inputs: (range: 10000 | threads: 2) Outputs: 0.015s | Total #: 1302 | Sum: 6187957 | 
+Inputs: (range: 10000 | threads: 16) Outputs: 0.038s | Total #: 1646 | Sum: 8179581 | 
+Inputs: (range: 10000 | threads: 4) Outputs: 0.022s | Total #: 1396 | Sum: 6830165 | 
+
+Inputs: (range: 100 | threads: 2) Outputs: 0.012s | Total #: 26 | Sum: 1111 | // Multithreads almost fixed?? It seems to think 51 is a prime
+Inputs: (range: 100 | threads: 1) Outputs: 0.008s | Total #: 25 | Sum: 1060 | 
+Inputs: (range: 100000 | threads: 1) Outputs: 0.119s | Total #: 9592 | Sum: 454396537 | 
+
+Inputs: (range: 100000 | threads: 2) Outputs: 0.085s | Total #: 10106 | Sum: 486701533 | 
