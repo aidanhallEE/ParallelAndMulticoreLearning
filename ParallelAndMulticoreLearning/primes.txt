@@ -159,3 +159,21 @@ Inputs: (range: 100 | threads: 2) Outputs: 0.031s | Total #: 99 | Sum: 5049 |
 Inputs: (range: 10000000 | threads: 1) Outputs: 0.017s | Total #: 9999999 | Sum: 50000004999999 | 
 Inputs: (range: 100000000 | threads: 1) Outputs: 0.140s | Total #: 99999999 | Sum: 5000000049999999 | 
 Inputs: (range: 100000000 | threads: 10) Outputs: 0.041s | Total #: 99999999 | Sum: 5000000049999999 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.006s | Total #: 99 | Sum: 5049 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.007s | Total #: 99 | Sum: 5049 | 
+Inputs: (range: 100 | threads: 2) Outputs: 0.007s | Total #: 99 | Sum: 5049 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.006s | Total #: 99 | Sum: 5049 |
+
+Inputs: (range: 100 | threads: 1) Outputs: 0.007s | Total #: 33 | Sum: 528 | // REAL DATA AGAIN FINALLY [BUT ITS BROKEN!!]
+Inputs: (range: 100 | threads: 1) Outputs: 0.005s | Total #: 32 | Sum: 496 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.005s | Total #: 32 | Sum: 496 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.006s | Total #: 32 | Sum: 496 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.052s | Total #: 32 | Sum: 496 | 
+Inputs: (range: 10 | threads: 1) Outputs: 0.005s | Total #: 0 | Sum: 0 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.006s | Total #: 0 | Sum: 0 | 
+Inputs: (range: 100000 | threads: 1) Outputs: 0.121s | Total #: 0 | Sum: 0 | 
+Inputs: (range: 100000 | threads: 10) Outputs: 0.267s | Total #: 0 | Sum: 0 | 
+Inputs: (range: 100 | threads: 1) Outputs: 0.007s | Total #: 24 | Sum: 963 | 
+
+Inputs: (range: 100 | threads: 1) Outputs: 0.006s | Total #: 25 | Sum: 1060 |  // FULLY FUNCTIONAL EXCEPT FOR PRINTING THE TOP 10!
+Inputs: (range: 100 | threads: 2) Outputs: 0.007s | Total #: 11 | Sum: 783 |  // Uhhh nevermind

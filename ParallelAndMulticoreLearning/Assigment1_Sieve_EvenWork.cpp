@@ -109,16 +109,15 @@ void ThreadSorter(int n, int threadNum) {
 void PrimeFinder(int start, int end) {
 	// Make local vector
 	int segmentSize = end - start;
-	vector <bool> localNumArray(segmentSize+1, 0);
+	vector <bool> localNumArray(segmentSize + 1, 0);
+	vector <int> localintArray(0);
 
 	int startMultiplier = 0;
 	int prime = 0;
 
-	int TESTCOUNTER = 0;
-
 	for (int p = 0; p < size(rootPrimes); p++) { // USE THIS FOR LOOP TO INSTEAD CYCLE THROUGH THE FOUND PRIMES
 		prime = rootPrimes[p];
-		
+
 		startMultiplier = start / prime + start % prime; // Get the starting value to be multiplied by the prime number
 		if (startMultiplier < 2) {
 			startMultiplier = start;
@@ -129,13 +128,22 @@ void PrimeFinder(int start, int end) {
 		for (int j = startMultiplier; prime * (j) < (end + 1); j++) {
 			//cout << "Inside the second for loop\n";
 			//cout << "Position of multiplied: " << prime * j - start << " j: " << j << "\n";
-			//localNumArray[(prime * j)-start] = 1; // Fix this to fit inside the bounds
+			localNumArray[(prime * j)-start] = 1; // Fix this to fit inside the bounds
 		}
 	}
 	//cout << "After thread prime finder\n";
 
 	//Collect the results
 	// how to do......
+	// Array for numbers
+	for (int i = 0; i < segmentSize + 1; i++) {
+		if (localNumArray[i] == 0) {
+			localintArray.push_back(i + start);
+		}
+	}
+
+	// Add too final
+	finalArray.insert(finalArray.end(), localintArray.begin(), localintArray.end());
 }
 
 void RootPrimeFinder(int n) { // n is the sqrt of the range
@@ -171,15 +179,14 @@ void ResultsToFile(float time) {
 	int total = 0;
 
 	//get sum and total (cycle through the entire array)
-	for (int i = 2; i < rangeInput+1; i++) {
-		if (compositeNumArray[i] == 0) {
+	
+	for (int i = 0; i < finalArray.size(); i++) {
 			//DEBUG
-			//cout << compositeNumArray[i] << '\n';
+			cout << "num lol " << finalArray[i] << '\n';
 			total++;
-			sum = sum + i;
-		}
+			sum = sum + finalArray[i];
 	}
-
+	
 	//<execution time> <total number of primes found> <sum of all primes found> <top ten maximum primes, listed in order from lowest to highest>
 	File << "Inputs: (range: " << rangeInput << " | threads: " << threadInput << ") Outputs: " << fixed << setprecision(3) << time << "s | Total #: " << total << " | Sum: " << sum << " | ";
 
